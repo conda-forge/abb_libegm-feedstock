@@ -12,7 +12,7 @@ source:
   rev: 2c9350abfb67131cae796805fed8cd6eeb2ab7f9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -20,6 +20,7 @@ requirements:
     - ${{ stdlib('c') }}
     - cmake
     - ninja
+    - libprotobuf 3.21.*
   host:
     - libprotobuf 3.21.* # pinned to 3.21 to avoid protobuf 7.x requiring newer MSVC/toolchain and causing ABI/build breaks
     - libboost-devel <1.87 # limited to avoid compatibility issues with boost::asio::io_service
