@@ -1,6 +1,6 @@
 context:
   # Version sourced from upstream package.xml
-  name: abb_libegm
+  name: abb-libegm
   version: 1.2.0
 
 package:
@@ -20,10 +20,10 @@ requirements:
     - ${{ stdlib('c') }}
     - cmake
     - ninja
-    - libprotobuf 3.21.*
+    - libprotobuf
   host:
-    - libprotobuf 3.21.* # pinned to 3.21 to avoid protobuf 7.x requiring newer MSVC/toolchain and causing ABI/build breaks
-    - libboost-devel <1.87 # limited to avoid compatibility issues with boost::asio::io_service
+    - libprotobuf
+    - libboost-devel
 
 tests:
   - package_contents:
