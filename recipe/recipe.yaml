@@ -12,7 +12,7 @@ source:
   rev: 2c9350abfb67131cae796805fed8cd6eeb2ab7f9
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
