@@ -23,7 +23,7 @@ requirements:
     - libprotobuf
   host:
     - libprotobuf
-    - libboost-devel
+    - libboost-devel >=1.84,<1.87
 
 tests:
   - package_contents:
