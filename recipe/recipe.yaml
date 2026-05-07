@@ -10,6 +10,8 @@ package:
 source:
   git: https://github.com/ros-industrial/abb_libegm
   rev: 2c9350abfb67131cae796805fed8cd6eeb2ab7f9
+  patches:
+    - patches/0001-fix-windows-cmake.patch
 
 build:
   number: 2
@@ -21,9 +23,11 @@ requirements:
     - cmake
     - ninja
     - libprotobuf
+
   host:
     - libprotobuf
-    - libboost-devel >=1.84,<1.87
+    - libabseil
+    - boost
 
 tests:
   - package_contents:
