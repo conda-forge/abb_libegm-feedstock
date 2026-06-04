@@ -19,15 +19,17 @@ build:
 requirements:
   build:
     - ${{ compiler('cxx') }}
-    - ${{ stdlib('c') }}
+    - if: not win
+      then: ${{ stdlib('c') }}
     - cmake
     - ninja
     - libprotobuf
 
   host:
     - libprotobuf
-    - libabseil
-    - boost
+    - if: win
+      then: libabseil
+    - libboost-devel <1.87
 
 tests:
   - package_contents:
