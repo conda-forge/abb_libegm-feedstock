@@ -1,5 +1,3 @@
-c_stdlib:
-- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -7,8 +5,8 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libabseil:
-- '20250512'
+- '20260526'
 libprotobuf:
-- 6.31.1
+- 7.35.1
 target_platform:
 - win-64
