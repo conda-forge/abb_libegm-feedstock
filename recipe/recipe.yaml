@@ -14,7 +14,7 @@ source:
     - patches/0001-fix-windows-cmake.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
