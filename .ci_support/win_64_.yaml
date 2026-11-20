@@ -3,9 +3,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2022
+- vs
+cxx_compiler_version:
+- '2022'
 libabseil:
 - '20260817'
+libboost_devel:
+- '1.88'
 libprotobuf:
 - 7.35.1
 target_platform:

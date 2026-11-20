@@ -12,9 +12,12 @@ source:
   rev: 2c9350abfb67131cae796805fed8cd6eeb2ab7f9
   patches:
     - patches/0001-fix-windows-cmake.patch
+    # Boost >= 1.87 removed boost::asio::io_service. Backport of the C++ part of
+    # https://github.com/ros-industrial/abb_libegm/pull/172 (drop once released upstream)
+    - patches/0002-support-boost-1.87-io_context.patch
 
 build:
-  number: 4
+  number: 5
 
 requirements:
   build:
@@ -29,7 +32,7 @@ requirements:
     - libprotobuf
     - if: win
       then: libabseil
-    - libboost-devel <1.87
+    - libboost-devel
 
 tests:
   - package_contents:

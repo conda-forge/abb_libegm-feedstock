@@ -1,0 +1,112 @@
+diff --git a/include/abb_libegm/egm_base_interface.h b/include/abb_libegm/egm_base_interface.h
+index d4c18ee..153bc1e 100644
+--- a/include/abb_libegm/egm_base_interface.h
++++ b/include/abb_libegm/egm_base_interface.h
+@@ -70,7 +70,7 @@ public:
+    * \param port_number for the server's UDP socket.
+    * \param configuration for the interface's configuration.
+    */
+-  EGMBaseInterface(boost::asio::io_service& io_service,
++  EGMBaseInterface(boost::asio::io_context& io_service,
+                    const unsigned short port_number,
+                    const BaseConfiguration& configuration = BaseConfiguration());
+ 
+diff --git a/include/abb_libegm/egm_controller_interface.h b/include/abb_libegm/egm_controller_interface.h
+index b1933e7..d850e22 100644
+--- a/include/abb_libegm/egm_controller_interface.h
++++ b/include/abb_libegm/egm_controller_interface.h
+@@ -67,7 +67,7 @@ public:
+    * \param port_number for the server's UDP socket.
+    * \param configuration for the interface's configuration.
+    */
+-  EGMControllerInterface(boost::asio::io_service& io_service,
++  EGMControllerInterface(boost::asio::io_context& io_service,
+                          const unsigned short port_number,
+                          const BaseConfiguration& configuration = BaseConfiguration());
+ 
+diff --git a/include/abb_libegm/egm_trajectory_interface.h b/include/abb_libegm/egm_trajectory_interface.h
+index 6d3c6b4..89ba319 100644
+--- a/include/abb_libegm/egm_trajectory_interface.h
++++ b/include/abb_libegm/egm_trajectory_interface.h
+@@ -69,7 +69,7 @@ public:
+    * \param port_number for the server's UDP socket.
+    * \param configuration for the interface's configuration.
+    */
+-  EGMTrajectoryInterface(boost::asio::io_service& io_service,
++  EGMTrajectoryInterface(boost::asio::io_context& io_service,
+                          const unsigned short port_number,
+                          const TrajectoryConfiguration& configuration = TrajectoryConfiguration());
+ 
+diff --git a/include/abb_libegm/egm_udp_server.h b/include/abb_libegm/egm_udp_server.h
+index 329aacd..a248969 100644
+--- a/include/abb_libegm/egm_udp_server.h
++++ b/include/abb_libegm/egm_udp_server.h
+@@ -38,6 +38,7 @@
+ #define EGM_UDP_SERVER_H
+ 
+ #include <boost/asio.hpp>
++#include <boost/shared_ptr.hpp>
+ 
+ namespace abb
+ {
+@@ -109,7 +110,7 @@ public:
+    * \param port_number for the server's UDP socket.
+    * \param p_interface that processes the received messages.
+    */
+-  UDPServer(boost::asio::io_service& io_service,
++  UDPServer(boost::asio::io_context& io_service,
+             unsigned short port_number,
+             AbstractUDPServerInterface* p_interface);
+ 
+diff --git a/src/egm_base_interface.cpp b/src/egm_base_interface.cpp
+index 0219754..a8bce80 100644
+--- a/src/egm_base_interface.cpp
++++ b/src/egm_base_interface.cpp
+@@ -768,7 +768,7 @@ const unsigned int EGMBaseInterface::WAIT_TIME_MS;
+  * Primary methods
+  */
+ 
+-EGMBaseInterface::EGMBaseInterface(boost::asio::io_service& io_service,
++EGMBaseInterface::EGMBaseInterface(boost::asio::io_context& io_service,
+                                    const unsigned short port_number,
+                                    const BaseConfiguration& configuration)
+ :
+diff --git a/src/egm_controller_interface.cpp b/src/egm_controller_interface.cpp
+index b8c503e..e0db8d3 100644
+--- a/src/egm_controller_interface.cpp
++++ b/src/egm_controller_interface.cpp
+@@ -144,7 +144,7 @@ void EGMControllerInterface::ControllerMotion::writeOutputs(const wrapper::Outpu
+  * Primary methods
+  */
+ 
+-EGMControllerInterface::EGMControllerInterface(boost::asio::io_service& io_service,
++EGMControllerInterface::EGMControllerInterface(boost::asio::io_context& io_service,
+                                                const unsigned short port_number,
+                                                const BaseConfiguration& configuration)
+ :
+diff --git a/src/egm_trajectory_interface.cpp b/src/egm_trajectory_interface.cpp
+index 9578a26..42e6a4e 100644
+--- a/src/egm_trajectory_interface.cpp
++++ b/src/egm_trajectory_interface.cpp
+@@ -1329,7 +1329,7 @@ bool EGMTrajectoryInterface::TrajectoryMotion::retrieveExecutionProgress(traject
+  * Primary methods
+  */
+ 
+-EGMTrajectoryInterface::EGMTrajectoryInterface(boost::asio::io_service& io_service,
++EGMTrajectoryInterface::EGMTrajectoryInterface(boost::asio::io_context& io_service,
+                                                const unsigned short port_number,
+                                                const TrajectoryConfiguration& configuration)
+ :
+diff --git a/src/egm_udp_server.cpp b/src/egm_udp_server.cpp
+index c966c24..72db204 100644
+--- a/src/egm_udp_server.cpp
++++ b/src/egm_udp_server.cpp
+@@ -46,7 +46,7 @@ namespace egm
+  * Class definitions: UDPServer
+  */
+ 
+-UDPServer::UDPServer(boost::asio::io_service& io_service,
++UDPServer::UDPServer(boost::asio::io_context& io_service,
+                      unsigned short port_number,
+                      AbstractUDPServerInterface* p_interface)
+ :

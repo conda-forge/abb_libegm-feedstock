@@ -12,6 +12,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '21'
+libboost_devel:
+- '1.88'
 libprotobuf:
 - 7.35.1
 macos_machine:
